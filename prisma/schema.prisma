@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String                  @id @default(uuid())
+  name     String
+  username String                  @unique
+  password String                  @db.Text
+  role     Role                    @default(PEMINJAM)
+  Peminjam Borrowing_Transaction[] @relation("Peminjam")
+  Penjaga  Borrowing_Transaction[] @relation("Penjaga")
+}
+
+model Authentication {
+  token String @id @db.VarChar(255)
+}
+
+model Book {
+  id                    String                  @id @default(uuid())
+  judul_buku            String
+  nama_pengarang        String
+  penerbit              String
+  tahun_terbit          Int
+  isbn                  String
+  jumlah_tersedia       Int
+  jumlah_dipinjam       Int
+  total_stock           Int
+  Borrowing_Transaction Borrowing_Transaction[]
+}
+
+model Borrowing_Transaction {
+  id                String            @id @default(uuid())
+  peminjam          User              @relation("Peminjam", fields: [id_peminjam], references: [id], onDelete: Cascade)
+  id_peminjam       String
+  penjaga           User?             @relation("Penjaga", fields: [id_penjaga], references: [id], onDelete: Cascade)
+  id_penjaga        String?
+  buku              Book              @relation(fields: [id_buku], references: [id], onDelete: Cascade)
+  id_buku           String
+  status_peminjaman Status_Peminjaman @default(WAITING)
+}
+
+enum Role {
+  ADMIN
+  PENJAGA
+  PEMINJAM
+}
+
+enum Status_Peminjaman {
+  WAITING
+  APPROVED
+  REJECTED
+  RETURNED
+}
