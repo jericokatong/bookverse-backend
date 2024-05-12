@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cors = require('cors');
 
 const indexRouter = require('./app/v1/index/router');
 const authenticationRouter = require('./app/v1/authentication/router');
@@ -13,6 +14,11 @@ const peminjamRouter = require('./app/v1/peminjam/router');
 
 const app = express();
 
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
