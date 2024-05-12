@@ -55,7 +55,7 @@ const registerPeminjam = async (req, res) => {
       },
     });
   } catch (error) {
-    if (error.name) {
+    if (error.statusCode) {
       return res.status(error.statusCode).json({
         status: 'fail',
         message: error.message,

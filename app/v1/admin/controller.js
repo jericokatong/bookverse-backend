@@ -103,7 +103,7 @@ const getUser = async (req, res) => {
     });
 
     return res.json({
-      status: 'fail',
+      status: 'success',
       message: 'Berhasil dapat data akun peminjam dan penjaga',
       data: {
         users,

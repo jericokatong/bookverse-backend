@@ -315,10 +315,52 @@ const getListBorrower = async (req, res) => {
   }
 };
 
+const getSummaryBookTransaction = async (req, res) => {
+  try {
+    // ambil summary
+    const countBuku = await prisma.book.count();
+
+    const jumlah_tersedia = await prisma.book.findMany();
+    let counter = 0;
+    jumlah_tersedia.forEach((item) => {
+      counter = counter + item.jumlah_tersedia;
+    });
+
+    const borrowing = await prisma.borrowing_Transaction.findMany({
+      where: {
+        status_peminjaman: 'APPROVED',
+      },
+    });
+
+    return res.json({
+      status: 'success',
+      message: 'summary',
+      data: {
+        countBuku,
+        jumlahTersedia: counter,
+        jumlahMeminjam: borrowing.length,
+      },
+    });
+  } catch (error) {
+    if (error.statusCode) {
+      return res.status(error.statusCode).json({
+        status: 'fail',
+        message: error.message,
+      });
+    } else {
+      return res.status(500).json({
+        status: 'fail',
+        message: 'Error pada server',
+      });
+    }
+  }
+};
+
 module.exports = {
   createPenjaga,
   getRequestBook,
   approveRequest,
   rejectRequest,
   getListBorrower,
+  getSummaryBookTransaction,
 };

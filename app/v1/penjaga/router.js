@@ -16,4 +16,10 @@ router.put(
 );
 router.get('/list-borrower', decodeToken, penjagaController.getListBorrower);
 
+router.get(
+  '/summary-book-transaction',
+  decodeToken,
+  penjagaController.getSummaryBookTransaction
+);
+
 module.exports = router;
