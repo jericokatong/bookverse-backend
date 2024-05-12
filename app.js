@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'https:bookverse.online',
+    origin: '*',
   })
 );
 app.use(logger('dev'));
