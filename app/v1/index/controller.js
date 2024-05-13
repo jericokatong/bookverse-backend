@@ -1,6 +1,6 @@
 const index = async (req, res) => {
   res.json({
-    message: 'Welcome to BookVerse API test 1',
+    message: 'Welcome to BookVerse API test 2',
   });
 };
 
