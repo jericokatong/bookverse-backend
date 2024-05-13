@@ -7,11 +7,6 @@ describe('Test API endpoints', () => {
     expect(res.status).toBe(200);
   });
 
-  // it('should return JSON format for GET /api', async () => {
-  //   const res = await request(app).get('/api');
-  //   expect(res.headers['content-type']).toEqual(expect.stringContaining('json'));
-  // });
-
   it('should return 200 OK for register peminjam POST /authentication/register/peminjam with body', async () => {
     const requestBody = {
       name: 'Peminjam Testing',
