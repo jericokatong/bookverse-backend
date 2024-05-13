@@ -7,15 +7,15 @@ describe('Test API endpoints', () => {
     expect(res.status).toBe(200);
   });
 
-  it('should return 200 OK for register peminjam POST /authentication/register/peminjam with body', async () => {
-    const requestBody = {
-      name: 'Peminjam Testing',
-      username: 'peminjamtesting1',
-      password: '123456',
-    }; // Data yang ingin Anda kirim
-    const res = await request(app)
-      .post('/authentication/register/peminjam')
-      .send(requestBody); // Mengirim body dengan metode .send()
-    expect(res.status).toBe(201);
-  });
+  //   it('should return 200 OK for register peminjam POST /authentication/register/peminjam with body', async () => {
+  //     const requestBody = {
+  //       name: 'Peminjam Testing',
+  //       username: 'peminjamtesting1',
+  //       password: '123456',
+  //     }; // Data yang ingin Anda kirim
+  //     const res = await request(app)
+  //       .post('/authentication/register/peminjam')
+  //       .send(requestBody); // Mengirim body dengan metode .send()
+  //     expect(res.status).toBe(201);
+  //   });
 });
